@@ -1,0 +1,24 @@
+S = geeksforgeeks
+Output: 7
+
+int longestSubstrDistinctChars (string S)
+{
+    // your code here
+    if (S.length() == 1) return 1;
+    int ans =0;
+    map <char,int > m1;
+    //m1[S[0]] = 1;
+    int start = 0;
+    for(int end =0;end<S.length();end++)
+    {
+        if(m1.find(S[end]) != m1.end())
+        {
+            start = max(start,m1[S[end]] + 1);
+            //cout<<start<<endl;
+        }
+        m1[S[end]] = end;
+        ans = max(ans,end-start+1 );
+    }
+    //cout<< ans<<endl;
+    return ans;
+}
