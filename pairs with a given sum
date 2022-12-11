@@ -1,0 +1,26 @@
+/*Given two unsorted arrays A of size N and B of size M of distinct elements, the task is to find all pairs from both arrays whose sum is equal to X.*/
+
+
+vector<pair<int,int>> allPairs(int A[], int B[], int n, int m, int x)
+    {
+        // Your code goes here 
+        vector<pair<int,int>> ans;
+        map<int,int> m1;
+        for(int i=0;i<n;i++)
+        {
+            m1[A[i]]+=1;
+        }
+        for(int i=0;i<m;i++)
+        {
+            if(m1.find(x-B[i]) !=m1.end())
+            {
+                for(int j=0;j<m1[x-B[i]];j++)
+                {
+                    ans.push_back(make_pair(x-B[i],B[i]));
+                }
+            }
+        }
+        sort(ans.begin(),ans.end());
+        return ans;
+        
+    }
