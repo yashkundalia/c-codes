@@ -1,0 +1,39 @@
+/*Given a N x M grid. Find All possible paths from top left to bottom right.From each cell you can either move only to right or down.*/
+
+
+
+
+bool issafe(int r, int c,int n,int m, vector< vector < int > > &grid )
+    {
+        return (r <= n-1 and c <= m-1 and grid[r][c] != -1);
+    }
+    void paths(int r, int c ,int n,int m, vector<vector<int> > &res,vector<vector<int> > &grid,vector<int> &ans)
+    {
+        if(r==n-1 and c == m-1)
+        {
+            ans.push_back(grid[r][c]);
+            res.push_back(ans);
+            ans.pop_back();
+            return;
+        }
+        int temp = grid[r][c];
+        ans.push_back(grid[r][c]);
+        if(issafe(r+1,c,n,m,grid))
+        {
+            paths(r+1,c,n,m,res,grid,ans);
+        }
+        if(issafe(r,c+1,n,m,grid))
+        {
+            paths(r,c+1,n,m,res,grid,ans);
+        }
+        ans.pop_back();
+        return;
+    }
+    vector<vector<int>> findAllPossiblePaths(int n, int m, vector<vector<int>> &grid)
+    {
+        // code here
+        vector<vector<int> > res;
+        vector<int > ans;
+        paths(0,0,n,m,res,grid,ans);
+        return res;
+    }
