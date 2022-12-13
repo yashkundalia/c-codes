@@ -1,0 +1,33 @@
+#include <iostream>
+#include <map>
+#include<unordered_map>
+#include <iterator>
+#include <vector>
+#include <string>
+#include <algorithm>
+#include<utility>
+#include<climits>
+
+
+
+using namespace std;
+
+int main()
+{
+    int a, b;
+    cin >>a>>b;
+    long long int ans =0;
+    ans+=a;
+    while(a>=b)
+    {
+        ans+=a/b;
+        a =a/b + a%b;
+        //ans+=a;
+    }
+    cout<<ans<<endl;
+    return 0;
+
+
+
+}
+
