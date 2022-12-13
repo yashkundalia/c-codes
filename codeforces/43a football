@@ -1,0 +1,42 @@
+#include <iostream>
+#include <map>
+#include<unordered_map>
+#include <iterator>
+#include <vector>
+#include <string>
+#include <algorithm>
+#include<utility>
+#include<climits>
+
+
+
+using namespace std;
+
+int main()
+{
+    int n;
+    cin >>n;
+    unordered_map<string,int > m1;
+    for(int i=0;i<n;i++)
+    {
+        string temp;
+        cin>>temp;
+        m1[temp]++;
+    }
+    string ans = "";
+    int goals=0;
+    for(auto i : m1)
+    {
+        if(i.second >= goals) 
+        {
+            ans = i.first;
+            goals = i.second;
+        }
+    }
+    cout<<ans<<endl;
+    return 0;
+
+
+
+}
+
