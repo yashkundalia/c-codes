@@ -1,0 +1,34 @@
+#include <iostream>
+#include <map>
+#include<unordered_map>
+#include <iterator>
+#include <vector>
+#include <string>
+#include <algorithm>
+#include<utility>
+#include<climits>
+#include<stack>
+
+
+using namespace std;
+
+
+
+
+int main()
+{
+    int n,x;
+    cin>>n>>x;
+    int ans =0;
+    for(int i=1;i<=min(x/2,n);i++)
+    {
+        if(x%i == 0 )
+        {
+            if(i <=n and x/i <=n) ans++;
+        }
+    }
+    if(x<=n) ans++;
+    cout<<ans<<endl;
+}
+
+//1 1000000000
