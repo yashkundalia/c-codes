@@ -1,0 +1,32 @@
+#include <iostream>
+#include <map>
+#include<unordered_map>
+#include <iterator>
+#include <vector>
+#include <string>
+#include <algorithm>
+#include<utility>
+#include<climits>
+#include<stack>
+
+
+using namespace std;
+
+
+
+
+int main()
+{
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        long long int x,y;
+        cin>>x >>y;
+        long long int a,b;
+        cin>>a>>b;
+        cout<< min(a*(x+y) , min(x,y)*b + abs(x-y)*a)<<endl;
+    }
+    return 0;
+}
+
