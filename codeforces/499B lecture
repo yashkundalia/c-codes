@@ -1,0 +1,55 @@
+#include <iostream>
+#include <map>
+#include<unordered_map>
+#include <iterator>
+#include <vector>
+#include <string>
+#include <algorithm>
+#include<utility>
+#include<climits>
+#include<stack>
+
+
+using namespace std;
+
+
+
+
+int main()
+{
+    unordered_map<string,string> m1;
+    unordered_map<string,string> m2;
+    int n,m;
+    cin>>n>>m;
+    for(int i=0;i<m;i++)
+    {
+        string first, second;
+        cin>>first>>second;
+        m1[first] = second;
+        //m2[second] = first;
+    }
+    vector<string> lec(n);
+    for(int i=0;i<n;i++)
+    {
+        cin>>lec[i];
+    }
+    string ans ="";
+    for(int i=0;i<n;i++)
+    {
+        if(lec[i].length() <= m1[lec[i]].length())
+        {
+            ans += lec[i];
+            ans += " ";
+        }
+        else
+        {
+            ans += m1[lec[i]];
+            ans += " ";
+        }
+        
+    }
+    cout<<ans<<endl;
+    return 0;
+}
+
+//1 1000000000
