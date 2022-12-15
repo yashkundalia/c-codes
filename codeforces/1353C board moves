@@ -1,0 +1,38 @@
+#include <iostream>
+#include <map>
+#include<unordered_map>
+#include <iterator>
+#include <vector>
+#include <string>
+#include <algorithm>
+#include<utility>
+#include<climits>
+#include<stack>
+
+
+using namespace std;
+
+
+
+
+int main()
+{
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        unsigned long long int n;
+        cin>>n;
+        unsigned long long int ans =0 ;
+        string ans1 = "";
+        for(long long int i=1;i<=(n-1)/2 ;i++)
+        {
+            ans+=8*i*i;
+            //ans1 = to_string(ans);
+        }
+        cout<<ans<<endl;
+    }
+    return 0;
+}
+
+//1 1000000000
