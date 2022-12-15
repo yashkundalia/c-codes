@@ -1,0 +1,28 @@
+#include <iostream>
+#include <map>
+#include<unordered_map>
+#include <iterator>
+#include <vector>
+#include <string>
+#include <algorithm>
+#include<utility>
+#include<climits>
+#include<stack>
+
+
+using namespace std;
+
+
+
+
+int main()
+{
+    int n,a,b;
+    cin>>n>>a>>b;
+    if(n-a >= b+1) cout<<b+1<<endl;
+    if(n-a < b+1) cout<<n-a<<endl;
+    
+    return 0;
+}
+
+//1 1000000000
