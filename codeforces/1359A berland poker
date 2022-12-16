@@ -1,0 +1,49 @@
+#include <iostream>
+#include <map>
+#include<unordered_map>
+#include <iterator>
+#include <vector>
+#include <string>
+#include <algorithm>
+#include<utility>
+#include<climits>
+#include<stack>
+
+#define ull unsigned long long
+#define ll long long
+
+using namespace std;
+
+
+
+
+int main()
+{
+   int t;
+   cin>>t;
+   while(t--)
+   {
+        int n,m,k;
+        cin>>n>>m>>k;
+        if(n/k >=m) 
+        {
+            cout<<m<<endl;
+            continue;
+        }
+        else if(n==m or m==0) cout<<0<<endl;
+        else
+        {
+            int diff = m-n/k;
+            if(diff > k-1) 
+            {
+                if(diff%(k-1) !=0 ) diff = diff/(k-1) + 1;
+                else diff = diff/(k-1);
+            }
+            else diff =1;
+            cout<< n/k - diff<<endl;
+        }
+   }
+   return 0;
+}
+
+//1 1000000000
