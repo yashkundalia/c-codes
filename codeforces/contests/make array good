@@ -1,0 +1,101 @@
+/*An array b of m positive integers is good if for all pairs i and j (1≤i,j≤m), max(bi,bj) is divisible by min(bi,bj).
+
+You are given an array a of n positive integers. You can perform the following operation:
+
+Select an index i (1≤i≤n) and an integer x (0≤x≤ai) and add x to ai, in other words, ai:=ai+x.
+After this operation, ai≤1018 should be satisfied.
+You have to construct a sequence of at most n operations that will make a good. It can be proven that under the constraints of the problem, such a sequence of operations always exists.
+
+Input
+Each test contains multiple test cases. The first line contains a single integer t (1≤t≤104) — the number of test cases. The description of the test cases follows.
+
+The first line of each test case contains a single integer n (1≤n≤105) — the length of the array a.
+
+The second line of each test case contains n space-separated integers a1,a2,…,an (1≤ai≤109) — representing the array a.
+
+It is guaranteed that the sum of n over all test cases does not exceed 105.
+
+Output
+For each test, output a single integer p (0≤p≤n) — denoting the number of operations in your solution.
+
+In each of the following p lines, output two space-separated integers — i and x.
+
+You do not need to minimize the number of operations. It can be proven that a solution always exists. */
+
+4
+4
+2 3 5 5
+2
+4 8
+5
+3 4 343 5 6
+3
+31 5 17
+
+
+
+
+///code
+
+
+#include <iostream>
+#include <map>
+#include<unordered_map>
+#include <iterator>
+#include <vector>
+#include <string>
+#include <algorithm>
+#include<utility>
+#include<climits>
+#include<stack>
+
+#define ull unsigned long long
+#define ll long long
+//#define NUM 1000000001
+#define NUM 500000000
+using namespace std;
+
+
+
+
+int main()
+{
+    ll t;
+    cin>>t;
+    while(t--)
+    {
+        ll n;
+        cin>>n;
+        vector<pair<ll,ll> > v;
+        vector<pair<ll,ll> > ans;
+        for(ll i=0;i<n;i++)
+        {
+            ll temp;
+            cin>>temp;
+            //v[i].first = temp;
+            //v[i].second = i+1;
+            v.push_back(make_pair(temp,i+1));
+        }
+        sort(v.begin(),v.end());
+        for(ll i=1;i<n;i++)
+        {
+            if(v[i].first % v[i-1].first !=0 )
+            {
+                ll q = v[i].first / v[i-1].first + 1 ;
+                ll num = v[i-1].first * q;
+                ans.push_back(make_pair(v[i].second , num - v[i].first));
+                v[i].first = num;
+            }
+            else continue;
+        }
+        cout<<ans.size()<<endl;
+        for(ll i =0 ;i<ans.size();i++)
+        {
+            cout<<ans[i].first << " "<<ans[i].second<<endl;
+        }
+
+    }
+    return 0;
+}
+
+//1 1000000000
