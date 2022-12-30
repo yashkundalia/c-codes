@@ -1,0 +1,70 @@
+#include <iostream>
+#include <map>
+#include<unordered_map>
+#include <iterator>
+#include <vector>
+#include <string>
+#include <algorithm>
+#include<utility>
+#include<climits>
+#include<stack>
+
+#define ull unsigned long long
+#define ll long long
+//#define NUM 1000000001
+//ull mod  = 998244353;
+using namespace std;
+
+ll binarysearch(ll num)
+{
+    ll l = 1;
+    ll r = (ll) 2000000123;
+    while(l<r)
+    {
+        ll mid = l + (r-l + 1)/2;
+        if(mid*mid == num) return mid;
+        if(mid*mid < num) l =mid ;
+        else r = mid - 1;
+    }
+    return l;
+}
+
+
+int main()
+{
+    ll num;
+    cin>>num;
+    while(num--)
+    {
+        ll l ,r;
+        cin>>l>>r;
+        ll ans  =0;
+        ll sql = binarysearch(l);
+        ll sqr = binarysearch(r);
+        if(sql == sqr)
+        {
+            for(ll i=0;i<3;i++)
+            {
+                if(l<= sql*(sql+i) and sql*(sql + i) <= r) ans++;
+            }
+        }
+        else
+        {
+            ans = (sqr-sql-1)*3;
+            for(ll i=0;i<3;i++)
+            {
+                if(l<= sql*(sql+i) and sql*(sql + i) <= r) ans++;
+                if(l<= sqr*(sqr+i) and sqr*(sqr + i) <= r) ans++;
+            }
+        }
+        /*for(ll i=l;i<=r;i++)
+        {
+            ll id = binarysearch(i);
+            if(i%id == 0) ans++;
+
+        }*/
+        cout<<ans<<endl;
+    }
+    //cout<<binarysearch(num)<<endl;
+    return 0;
+}
