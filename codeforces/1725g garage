@@ -1,0 +1,55 @@
+#include <iostream>
+#include <map>
+#include<unordered_map>
+#include <iterator>
+#include <vector>
+#include <string>
+#include <algorithm>
+#include<utility>
+#include<climits>
+#include<stack>
+
+#define ull unsigned long long
+#define ll long long
+//#define NUM 1000000001
+//ull mod  = 998244353;
+using namespace std;
+
+ll minarray(vector<ll> v)
+{
+    ll m1 = INT_MAX;
+    ll id =-1;
+    for(ll i=0;i<v.size();i++)
+    {
+        //m1 = min(m1,v[i]);
+        if(m1 > v[i])
+        {
+            m1 = v[i];
+            id = i;
+        }
+    }
+    return id;
+}
+int main()
+{
+    ll n;
+    cin>>n;
+    if(n<=3)
+    {
+        cout<<2*n + 1<<endl;
+    }
+    else if((n-4) % 3 == 0)
+    {
+        ll temp = (n-4)/3;
+        cout<<4*temp +4 + 4 <<endl;
+    }
+    else
+    {
+        ll temp = (n-4)/3;
+        ll ans = 4*temp + 4 + 4 ;
+        if((n-4)%3 == 1) ans =ans+1;
+        else ans = ans+3;
+         cout<<ans<<endl;
+    }
+    return 0;
+}
