@@ -1,0 +1,79 @@
+#include <iostream>
+#include <map>
+#include<unordered_map>
+#include <iterator>
+#include <vector>
+#include <string>
+#include <algorithm>
+#include<utility>
+#include<climits>
+#include<stack>
+
+#define ull unsigned long long
+#define ll long long
+//#define NUM 1000000001
+//ull mod  = 998244353;
+using namespace std;
+
+
+int main()
+{
+    ll t;
+    cin>>t;
+    while(t--)
+    {
+        ll n;
+        cin>>n;
+        vector<ll> v;
+        for(ll i=0;i<n;i++)
+        {
+            ll temp;
+            cin>>temp;
+            v.push_back(temp);
+        }
+        ll i=0;
+    
+        ll sum1 =0,sum2 =0;
+        vector<ll>  lsum ;
+        vector<ll> rsum ;
+        while(i<=n-1)
+        {
+            sum1 +=v[i];
+            sum2 +=v[n-1 - i];
+            rsum.push_back(sum2);
+            //rsum[n - 1 -i] = sum2;
+            lsum.push_back(sum1);
+        
+            //lsum[sum1] = i+1;
+            
+            i++;
+            //j--;
+        }
+        
+        ll ans = 0;
+        i=0;
+        ll j=0;
+        while(i<=n-1 and  j<=n-1)
+        {
+            if(lsum[i] < rsum[j])
+            {
+                i++;
+            }
+            else if(lsum[i] > rsum[j])
+            {
+                j++;
+            }
+            else if(lsum[i] == rsum[j])
+            {
+                i++;
+                j++;
+                if(i+j <=n )ans = max(ans,i+j);
+                else break;
+            }
+        }
+        cout<<ans<<endl;
+
+
+    }
+    return 0;
+}
