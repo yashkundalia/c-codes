@@ -1,0 +1,48 @@
+#include <iostream>
+#include <map>
+#include<unordered_map>
+#include <iterator>
+#include <vector>
+#include <string>
+#include <algorithm>
+#include<utility>
+#include<climits>
+#include<stack>
+
+#define ull unsigned long long
+#define ll long long
+//#define NUM 1000000001
+//ull mod  = 998244353;
+using namespace std;
+
+
+int main()
+{
+    ll t;
+    cin>>t;
+    while(t--)
+    {
+        ll n,k;
+        cin>>n>>k;
+        vector<ll> v(n,0);
+        ll sum =0;
+        for(ll i=0;i<n;i++)
+        {
+            ll temp;
+            cin>>temp;
+            v[i] = temp;
+            sum += v[i]/k;
+            v[i] = v[i]%k;
+        }
+        sort(v.rbegin(),v.rend());
+        for(ll i=0,j = n-1 ;i< j ;i++,j--)
+        {
+            while(v[i] + v[j] < k and i < j) j--;
+            if(i == j) break;
+            sum++;
+        }
+        cout<<sum<<endl;
+
+    }
+    return 0;
+}
