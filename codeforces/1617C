@@ -1,0 +1,104 @@
+#include <iostream>
+#include <map>
+#include<unordered_map>
+#include <iterator>
+#include <vector>
+#include <string>
+#include <algorithm>
+#include<utility>
+#include<climits>
+#include<stack>
+
+#define ull unsigned long long
+#define ll long long
+//#define NUM 1000000001
+//ull mod  = 998244353;
+using namespace std;
+
+long long get(int x) 
+{
+    return x * 1ll * (x + 1) / 2;
+}
+int main()
+{
+    int t;
+    cin >> t;
+    while (t--) 
+    {
+        ll n;
+        cin>>n;
+        
+        vector<ll> v;
+        for(ll i=0;i<n;i++)
+        {
+            ll temp;
+            cin>>temp;
+            v.push_back(temp);
+        }
+        /*if(n==1 and v[0] == 1)
+        {
+            cout<<0<<endl;
+            continue;
+        }*/
+        vector<bool> check(n+1,false);
+        check[0] = true;
+        for(ll i=0;i<n;i++)
+        {
+            if(v[i]<=n) 
+            {
+                if(check[v[i]] == false)
+                {
+                    check[v[i]] = true;
+                    v[i] = 0;
+                }
+                else continue;
+                
+            }
+        }
+        /*for(ll i=1;i<=n;i++)
+        {
+            if(!check[i]) cout<<0<<endl;
+            else cout<<1<<endl;
+        }
+        cout<<endl;*/
+        sort(v.begin(),v.end());
+        ll j =-1;
+        for(ll i=0;i<n;i++)
+        {
+            if(v[i] != 0)
+            {
+                j =i;
+                break;
+            }
+
+        }
+        ll ans  =0;
+        if(j != -1)
+        {
+            for(ll i=1;i<=n;i++)
+            {
+                if(check[i] == false)
+                {
+                    ll num = v[j]/2 + v[j]%2;
+                    if(num > i)
+                    {
+                        ans++;
+                        check[i] = true;
+                        j++;
+                    }
+                    else
+                    {
+                        ans = -1;
+                        break;
+                    }
+                }
+            }
+        }
+        
+        cout<<ans<<endl;
+        
+    }
+    
+    
+    return 0;
+}
