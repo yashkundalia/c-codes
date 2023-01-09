@@ -1,0 +1,61 @@
+#include <iostream>
+#include <map>
+#include<unordered_map>
+#include <iterator>
+#include <vector>
+#include <string>
+#include <algorithm>
+#include<utility>
+#include<climits>
+#include<stack>
+
+#define ull unsigned long long
+#define ll long long
+//#define NUM 1000000001
+//ull mod  = 998244353;
+using namespace std;
+
+long long get(int x) 
+{
+    return x * 1ll * (x + 1) / 2;
+}
+int main()
+{
+    int t;
+    cin >> t;
+    while (t--) 
+    {
+        ll n,h;
+        cin>>n>>h;
+        vector<ll> v(n);
+        for(ll i=0;i<n;i++)
+        {
+            ll temp;
+            cin>>temp;
+            v[i] = temp;
+        }
+        ll l=0;
+        ll r = 1e18;
+        ll ans = 1e18;
+        while(l<=r)
+        {
+            ll mid = l + (r-l)/2;
+            ll sum =0;
+            for(ll i=1;i<n;i++)
+            {
+                sum += min(mid,v[i] - v[i-1]);
+            }
+            sum += mid;
+            if(sum < h) l = mid +1;
+            else
+            {
+                r = mid -1;
+                ans = mid;
+            }
+        }
+        cout<<ans<<endl;
+    }
+    
+    
+    return 0;
+}
