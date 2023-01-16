@@ -1,0 +1,99 @@
+#include <iostream>
+#include <map>
+#include<unordered_map>
+#include <iterator>
+#include <vector>
+#include <string>
+#include <algorithm>
+#include<utility>
+#include<climits>
+#include<stack>
+
+#define ull unsigned long long
+#define ll long long
+//#define NUM 1000000001
+//ull mod  = 998244353;
+using namespace std;
+
+
+int main()
+{
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        ll n,m;
+        cin>>n>>m;
+        if(n > m)
+        {
+            cout<<"NO"<<endl;
+            continue;
+        }
+        if(n==1)
+        {
+            cout<<"YES"<<endl;
+            cout<<m<<endl;
+            continue;
+        }
+        if(n==m)
+        {
+            cout<<"YES"<<endl;
+            for(ll i=0;i<n;i++)
+            {
+                cout<<1<<" ";
+            }
+            cout<<endl;
+            continue;
+        }
+        ll num  = m/n;
+        if(n%2 == 0)
+        {
+            if(m%n == 0)
+            {
+                cout<<"YES"<<endl;
+                for(ll i=0;i<n;i++)
+                {
+                    cout<<m/n<<" ";
+                }
+                cout<<endl;
+                continue;
+            }
+            else
+            {
+                ll rem = m%n;
+                if(rem%2 == 0)
+                {
+                    cout<<"YES"<<endl;
+                    cout<<num + rem/2<<" ";
+                    cout<<num + rem/2<<" ";
+                    for(ll i=0;i<n-2;i++)
+                    {
+                        cout<<num<<" ";
+                    }   
+                    cout<<endl;
+                    continue;
+
+                }
+                else
+                {
+                    cout<<"NO"<<endl;
+                    continue;
+                }
+            }
+        }
+        else
+        {
+            cout<<"YES"<<endl;
+            cout<<num + m%n<<" ";
+            for(ll i=0;i<n-1;i++)
+            {
+                cout<<num<<" ";
+            }   
+            cout<<endl;
+            continue;
+            
+        }
+
+    }
+    return 0;
+}
