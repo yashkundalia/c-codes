@@ -1,0 +1,65 @@
+#include <iostream>
+#include <map>
+#include<unordered_map>
+#include <iterator>
+#include <vector>
+#include <string>
+#include <algorithm>
+#include<utility>
+#include<climits>
+#include<stack>
+
+#define ull unsigned long long
+#define ll long long
+//#define NUM 1000000001
+//ull mod  = 998244353;
+using namespace std;
+
+
+void solve()
+{
+    ll  n ;
+    cin>>n;
+    vector< vector< ll > > v(n);
+    unordered_map<ll,ll> m1;
+    for(ll i=0;i<n;i++)
+    {
+        ll k;
+        cin>>k;
+        v[i].resize(k);
+        for(ll j=0;j<k;j++)
+        {
+            cin>>v[i][j] ;
+            m1[v[i][j]]++;
+        }
+    }
+    for(ll i=0;i<n;i++)
+    {
+        ll ok =1;
+        for(auto x : v[i])
+        {
+            if(m1[x] == 1)
+            {
+                ok =0;
+                break;
+            }
+        }
+        if(ok == 1)
+        {
+            cout<<"YES"<<endl;
+            return;
+        }
+    }
+    cout<<"NO"<<endl; 
+
+}
+int main()
+{
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        solve();
+    }
+    return 0;
+}
