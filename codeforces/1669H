@@ -1,0 +1,60 @@
+#include <iostream>
+#include <map>
+#include<unordered_map>
+#include <iterator>
+#include <vector>
+#include <string>
+#include <algorithm>
+#include<utility>
+#include<climits>
+#include<stack>
+
+#define ull unsigned long long
+#define ll long long
+//#define NUM 1000000001
+//ull mod  = 998244353;
+using namespace std;
+
+
+void solve()
+{
+    ll n;
+    ll k;
+    cin>>n>>k;
+    vector<ll> v;
+    vector<ll> cnt(31,0);
+    for(ll i=0;i<n;i++)
+    {
+        ll temp;
+        cin>>temp;
+        v.push_back(temp);
+        for(ll j = 30;j>=0;j--)
+        {
+            if(temp & (1<<j)) cnt[j]++;
+        }
+    }
+    ll ans =0;
+    for(ll i=30;i>=0;i--)
+    {
+        ll need = n - cnt[i];
+        if(need<=k)
+        {
+            k = k-need;
+            ans += (1<<i);
+        }
+    }
+    cout<<ans<<endl;
+    return ;
+    
+
+}
+int main()
+{
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        solve();
+    }
+    return 0;
+}
