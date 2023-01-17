@@ -1,0 +1,59 @@
+#include <iostream>
+#include <map>
+#include<unordered_map>
+#include <iterator>
+#include <vector>
+#include <string>
+#include <algorithm>
+#include<utility>
+#include<climits>
+#include<stack>
+
+#define ull unsigned long long
+#define ll long long
+//#define NUM 1000000001
+//ull mod  = 998244353;
+using namespace std;
+
+
+void solve()
+{
+    int n;
+    cin>>n;
+    vector<int> a;
+    vector<int> b;
+    for(int i=0;i<n;i++)
+    {
+        int temp;
+        cin>>temp;
+        a.push_back(temp);
+        b.push_back(temp);
+    }
+    sort(b.begin(),b.end());
+    vector<int> diff;
+    for(int i=0;i<n;i++)
+    {
+        if(a[i]!=b[i])
+        {
+            diff.push_back(a[i]);
+        }
+    }
+    int ans  = diff[0];
+    for(int i=1;i<diff.size();i++)
+    {
+        ans = ans&diff[i];
+    }
+    cout<<ans<<endl;
+    return;
+
+}
+int main()
+{
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        solve();
+    }
+    return 0;
+}
