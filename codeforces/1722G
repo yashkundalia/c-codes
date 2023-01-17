@@ -1,0 +1,92 @@
+#include <iostream>
+#include <map>
+#include<unordered_map>
+#include <iterator>
+#include <vector>
+#include <string>
+#include <algorithm>
+#include<utility>
+#include<climits>
+#include<stack>
+
+#define ull unsigned long long
+#define ll long long
+//#define NUM 1000000001
+//ull mod  = 998244353;
+using namespace std;
+
+
+void solve()
+{
+    int n;
+    cin>>n;
+    if(n==3)
+    {
+        cout<<2 << " "<<1<< " "<<3<<endl;
+        return;
+    }
+    bool check = false;
+    if(n&1) 
+    {
+        n = n -1 ; 
+        check = true;
+    }
+    vector<int> v(n+1,0);
+    for(int i=1,j=1;i<=n;i+=2)
+    {
+        v[i] = j;
+        j++;
+    }
+    for(int i=2,j=1;i<=n;i+=2)
+    {
+        v[i] = j;
+        j++;
+    }
+    if(n/2 & 1)
+    {
+        for(int i=1;i<n-1;i+=2)
+        {
+            v[i]|= 1<<30 ;
+        }
+        for(int i=3;i<n;i+=2)
+        {
+            v[i] |= 1<<29;
+        }
+    }
+    else
+    {
+        for(int i=1;i<=n;i+=2)
+        {
+            v[i]|= 1<<30;
+        }
+    }
+    if(check)
+    {
+        for(int i=0;i<=n;i++)
+        {
+            cout<<v[i]<<" ";
+        }
+        cout<<endl;
+        
+    }
+    else
+    {
+        for(int i=1;i<=n;i++)
+        {
+            cout<<v[i]<<" ";
+        }
+        cout<<endl;
+    }
+    return;
+
+}
+int main()
+{
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        solve();
+    }
+    return 0;
+}
