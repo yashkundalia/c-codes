@@ -1,0 +1,75 @@
+#include <iostream>
+#include <map>
+#include<unordered_map>
+#include <iterator>
+#include <vector>
+#include <string>
+#include <algorithm>
+#include<utility>
+#include<climits>
+#include<stack>
+
+#define ull unsigned long long
+#define ll long long
+//#define NUM 1000000001
+//ull mod  = 998244353;
+using namespace std;
+
+
+
+ll get_set_bits(ll n)
+{
+    ll count = 0;
+    while (n) {
+        count += n & 1;
+        n >>= 1;
+    }
+    return count;
+}
+ 
+void solve(vector<ll> fact)
+{
+    ll n;
+    cin>>n;
+    ll ans = get_set_bits(n); 
+    //cout<<ans<<endl;
+    for(ll mask = 0;mask <(1<<16);mask++)
+    {
+        ll sum =0;
+        ll cnt =0;
+        for(ll i=0;i<16ll;i++)
+        {
+            if(mask & (1<<i))
+            {
+                sum +=fact[i+1];
+                cnt++;
+            }
+        }
+        if(sum <=n)
+        {
+            ll rem = n- sum ;
+            if(((mask&1) and (rem&1)) or ((mask&2) and (rem&2))) continue;
+            ans = min(ans , cnt + get_set_bits(rem));
+        }
+        
+    }
+    cout<<ans<<endl;
+    return ;   
+
+
+}
+int main()
+{
+    int t ;
+    cin>>t;
+    vector<ll> fact(17,1);
+    for(ll i=1;i<17ll;i++)
+    {
+        fact[i] = fact[i-1]*i;
+    }
+    while(t--)
+    {
+        solve(fact);
+    }
+    return 0;
+}
