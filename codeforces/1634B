@@ -1,0 +1,91 @@
+#include <iostream>
+#include <map>
+#include<unordered_map>
+#include <iterator>
+#include <vector>
+#include <string>
+#include <algorithm>
+#include<utility>
+#include<climits>
+#include<stack>
+#include<set>
+#include<cmath>
+
+
+
+#define ull unsigned long long
+#define ll long long
+#define NUM 1000000007
+//ull mod  = 998244353;
+using namespace std;
+
+
+
+ll get_set_bits(ll n)
+{
+    ll count = 0;
+    while (n) {
+        count += n & 1;
+        n >>= 1;
+    }
+    return count;
+}
+
+ll func(string s)
+{
+    set<char> s1;
+    for(ll i=0;i<s.size();i++)
+    {
+        //if(s1.find(s[i]) == )
+        s1.insert(s[i]);
+    }
+    return s1.size();
+}
+ll getSum(ll n)
+{
+    ll sum = 0;
+    while (n != 0) {
+        sum = sum + n % 10;
+        n = n / 10;
+    }
+    return sum;
+}
+void solve()
+{
+    ll n,x,y;
+    cin>>n>>x>>y;
+    vector<ll> v;
+    ll odd =0;
+    for(ll i=0;i<n;i++)
+    {
+        ll temp;
+        cin>>temp;
+        if(temp&1) odd++;
+    }
+    if(odd%2 == 0)
+    {
+        if(x%2 == y%2) cout<<"Alice"<<endl;
+        else cout<<"Bob"<<endl;
+    }
+    else
+    {
+        if(x%2 == y%2) cout<<"Bob"<<endl;
+        else cout<<"Alice"<<endl;
+    }
+    return ;
+
+
+}
+
+
+int main()
+{
+    int t ;
+    cin>>t;
+   
+    while(t--)
+    {
+        solve();
+    }
+    return 0;
+}
