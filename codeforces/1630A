@@ -1,0 +1,83 @@
+#include <iostream>
+#include <map>
+#include<unordered_map>
+#include <iterator>
+#include <vector>
+#include <string>
+#include <algorithm>
+#include<utility>
+#include<climits>
+#include<stack>
+#include<set>
+#include<cmath>
+
+
+
+#define ull unsigned long long
+#define ll long long
+#define NUM 1000000007
+//ull mod  = 998244353;
+using namespace std;
+
+
+
+
+void solve()
+{
+    ll n,k;
+    cin>>n>>k;
+    ll num = n -1 ;
+    if(k ==0)
+    {
+        for(ll i=0;i<=num/2 ;i++)
+        {
+            ll ck = i^num;
+            cout<<i<<" "<< ck <<endl;
+        }
+        return ;
+    }
+    else if(k< n-1)
+    {
+        ll ck = k^num;
+        cout<<0<<" "<<ck<<endl;
+        cout<<k<<" "<<num<<endl;
+        for(ll i=0;i<=num/2;i++)
+        {
+            if(i==0 or i==ck or i==k) continue;
+            ll ck1 = i^num;
+            cout<<i<<" "<<ck1<<endl;
+        }
+        return;
+    }
+    if(k == n-1)
+    {
+        if(n==4ll)
+        {
+            cout<<-1<<endl;
+            return;
+        }
+        cout<<0<<" "<<2<<endl;
+        cout<<1<<" "<<n-3<<endl;
+        cout<<n-2<<" "<<n-1<<endl;
+        for(ll i=0;i<=num/2;i++)
+        {
+            if(i<=2) continue;
+            ll ck1 = i^num;
+            cout<<i<<" "<<ck1<<endl;
+        }
+    }    
+    return;
+}
+
+
+int main()
+{
+    int t ;
+    cin>>t;
+   
+    while(t--)
+    {
+        solve();
+    }
+    return 0;
+}
