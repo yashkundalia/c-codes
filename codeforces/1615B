@@ -1,0 +1,85 @@
+#include <iostream>
+#include <map>
+#include<unordered_map>
+#include <iterator>
+#include <vector>
+#include <string>
+#include <algorithm>
+#include<utility>
+#include<climits>
+#include<stack>
+#include<set>
+#include<cmath>
+
+
+
+#define ull unsigned long long
+#define ll long long
+#define NUM 1000000007
+//ull mod  = 998244353;
+using namespace std;
+
+
+
+
+void solve()
+{
+    ll l,r;
+    cin>>l>>r;
+    vector<ll> v(33,0);
+    for(ll i=l;i<=r;i=i++)
+    {
+        ll num =i;
+        ll pos = 0;
+        while(num)
+        {
+            if(num&1)
+            {
+                v[pos] ++ ;
+                //cout<<pos<<" ";
+            }
+            num >>=1;
+            pos++;
+        }
+        //v[0]++;
+        //cout<<endl;
+    }
+    //if(r%2 == 0) v[0]
+    ll ans = LLONG_MIN;
+    for(ll i=0;i<33;i++)
+    {
+        ans = max(ans,v[i]);
+        //cout<<v[i]<<endl;
+    }
+    cout<<r-l+1-ans<<endl;
+    return;
+
+}
+
+
+int main()
+{
+    vector< vector<ll> > v(20 , vector<ll> (200005 ,0));
+    for(ll i=0;i<20;i++)
+    {
+        for(ll j=1ll;j<200005ll;j++)
+        {
+            v[i][j] = v[i][j-1] + ((j>>i)&1) ;
+        }
+    } 
+    int t ;
+    cin>>t;
+   
+    while(t--)
+    {
+        ll l,r;
+        cin>>l>>r;
+        ll ans = LLONG_MIN;
+        for(ll i=0ll;i<20ll;i++)
+        {
+            ans = max(ans,v[i][r] - v[i][l-1]);
+        }
+        cout<<r-l + 1 - ans<<endl;
+    }
+    return 0;
+}
