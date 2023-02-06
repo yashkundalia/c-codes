@@ -1,0 +1,87 @@
+#include <iostream>
+#include <map>
+#include<unordered_map>
+#include <iterator>
+#include <vector>
+#include <string>
+#include <algorithm>
+#include<utility>
+#include<climits>
+#include<stack>
+#include<set>
+#include<cmath>
+#include<numeric>
+
+
+#define ull unsigned long long
+#define ll long long
+#define NUM 1000000007
+//ull mod  = 998244353;
+using namespace std;
+
+
+bool sortbysec(pair<ll,ll> &a , pair<ll,ll> &b)
+{
+    return (a.second >= b.second) ;
+}
+
+void solve()
+{
+    ll n,k;
+    cin>>n>>k;
+    vector<ll> v;
+    for(ll i=0;i<n;i++)
+    {
+        ll temp;
+        cin>>temp;
+        v.push_back(temp);
+    }
+    vector<ll> poss;
+    sort(v.begin(),v.end());
+    /*ll x =v[0];
+    while(x > 0)
+    {
+        poss.push_back(x);
+        x = x/2;
+    }*/
+    vector<vector<ll> > vals(200005ll);
+    for(ll i=0;i<n;i++)
+    {
+
+        ll x = v[i];
+        ll cur =0;
+        while(x > 0)
+        {
+            vals[x].push_back(cur);
+            x = x/2;
+            cur= cur + 1;
+        }
+    }
+    ll ans  = LLONG_MAX;
+    for(ll i =0;i<200005ll;i++)
+    {
+        if(vals[i].size() < k) continue;
+        sort(vals[i].begin(),vals[i].end());
+        ans = min(ans,accumulate(vals[i].begin() , vals[i].begin() + k , 0ll));
+        
+    }
+    
+    cout<<ans<<endl;
+    return;
+
+
+}
+
+
+int main()
+{
+    
+    int t ;
+    //cin>>t;
+    t =1;
+    while(t--)
+    {
+        solve();
+    }
+    return 0;
+}
