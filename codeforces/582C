@@ -1,0 +1,57 @@
+#include <iostream>
+#include <map>
+#include<unordered_map>
+#include <iterator>
+#include <vector>
+#include <string>
+#include <algorithm>
+#include<utility>
+#include<climits>
+#include<stack>
+#include<set>
+#include<cmath>
+
+
+
+#define ull unsigned long long
+#define ll long long
+#define NUM 1000000007
+//ull mod  = 998244353;
+using namespace std;
+
+
+
+
+void solve()
+{
+    ll n,m;
+    cin>>n>>m;
+    ll ans = 0;
+    ll num =n/m;
+    ll rem = num%10;
+    num =num/10;
+    ll rem1 =0;
+    for(ll i=0;i<=10;i++)
+    {
+        ans += (m*i)%10;
+        if(i==rem) rem1 = ans;
+    }
+    ans = ans*num + rem1;
+
+    cout<<ans<<endl;
+    return;
+}
+
+
+int main()
+{
+    
+    int t ;
+    cin>>t;
+   
+    while(t--)
+    {
+        solve();
+    }
+    return 0;
+}
