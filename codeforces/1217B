@@ -1,0 +1,82 @@
+#include <iostream>
+#include <map>
+#include<unordered_map>
+#include <iterator>
+#include <vector>
+#include <string>
+#include <algorithm>
+#include<utility>
+#include<climits>
+#include<stack>
+#include<set>
+#include<cmath>
+#include<numeric>
+
+
+#define ull unsigned long long
+#define ll long long
+#define NUM 1000000007
+//ull mod  = 998244353;
+using namespace std;
+
+
+bool sortbysec(pair<ll,ll> &a , pair<ll,ll> &b)
+{
+    return (a.second >= b.second) ;
+}
+
+void solve()
+{
+    ll n,x;
+    cin>>n>>x;
+    ll max_blow = LLONG_MIN;
+    ll max_diff =LLONG_MIN;
+    for(ll i=0;i<n;i++)
+    {
+        ll a,b;
+        cin>>a>>b;
+        max_blow = max(max_blow,a);
+        max_diff = max(max_diff , a -b);
+    }
+    x = x - max_blow;
+    if(x <=0) 
+    {
+        cout<<1<<endl;
+        return;
+    }
+    if(max_diff<=0)
+    {
+        cout<<-1<<endl;
+        return;
+    }
+    ll ans = 1;
+    ans += x/max_diff;
+    if(x%max_diff != 0) ans++;
+    cout<<ans<<endl;
+    return;
+
+}
+
+
+int main()
+{
+    
+    int t ;
+    cin>>t;
+    while(t--)
+    {
+        solve();
+    }
+    return 0;
+}
+
+/*
+5 1000000000
+2 1
+1 10
+1 1
+4 1000000000
+3 3
+
+
+999999997*/
