@@ -1,0 +1,95 @@
+#include <iostream>
+#include <map>
+#include<unordered_map>
+#include <iterator>
+#include <vector>
+#include <string>
+#include <algorithm>
+#include<utility>
+#include<climits>
+#include<stack>
+#include<set>
+#include<cmath>
+#include<numeric>
+
+
+#define ull unsigned long long
+#define ll long long
+#define NUM 1000000007
+//ull mod  = 998244353;
+using namespace std;
+
+
+bool sortbysec(pair<ll,ll> &a , pair<ll,ll> &b)
+{
+    if(a.first == b.first)
+    {
+        return (a.second <= b.second);
+    }
+    return (a.first < b.first) ;
+}
+
+void solve()
+{
+    
+   ll n;
+   cin>>n;
+   vector<pair<ll,ll> > v;
+   for(ll i=0;i<n;i++)
+    {
+        ll a,b;
+        cin>>a>>b;
+        v.push_back(make_pair(a,b));
+    }
+    sort(v.begin(),v.end() , sortbysec);
+    for(ll i=0;i<n-1;i++)
+    {
+        if(v[i].first == v[i+1].first) continue;
+        if(v[i].second > v[i+1].second) 
+        {
+            cout<<"NO"<<endl;
+            return;
+        }
+    }
+    cout<<"YES"<<endl;
+    string ans = "";
+    string r(v[0].first - 0 , 'R');
+    string u(v[0].second - 0, 'U');
+    ans += r + u;
+    for(ll i=0;i<n-1;i++)
+    {
+        string r(v[i+1].first - v[i].first , 'R');
+        string u(v[i+1].second - v[i].second , 'U');
+        ans += r + u;
+
+    }
+    cout<<ans<<endl;
+    return;
+
+
+
+}
+
+
+int main()
+{
+    
+    int t ;
+    cin>>t;
+    while(t--)
+    {
+        solve();
+    }
+    return 0;
+}
+
+/*
+5 1000000000
+2 1
+1 10
+1 1
+4 1000000000
+3 3
+
+
+999999997*/
