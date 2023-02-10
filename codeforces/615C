@@ -1,0 +1,106 @@
+#include <iostream>
+#include <map>
+#include<unordered_map>
+#include <iterator>
+#include <vector>
+#include <string>
+#include <algorithm>
+#include<utility>
+#include<climits>
+#include<stack>
+#include<set>
+#include<cmath>
+#include<numeric>
+
+
+#define ull unsigned long long
+#define ll long long
+#define NUM 1000000007
+//ull mod  = 998244353;
+using namespace std;
+
+
+bool sortbysec(pair<ll,ll> &a , pair<ll,ll> &b)
+{
+    if(a.first == b.first)
+    {
+        return (a.second <= b.second);
+    }
+    return (a.first < b.first) ;
+}
+
+void solve()
+{
+    ll n;
+    cin>>n;
+    ll a,b,c;
+    a=0;
+    b=0;
+    c=0;
+    for(ll i=2;i*i<=n;i++)
+    {
+        if(n%i == 0)
+        {
+            a =i;
+            break;
+        }
+    }
+    if(a==0)
+    {
+        cout<<"NO"<<endl;
+        return;
+    }
+    n =n/a;
+    for(ll i=2;i*i<=n;i++)
+    {
+        if(n%i == 0)
+        {
+            if(i==a) continue;
+            else
+            {
+                b=i;
+                break;
+            }
+        }
+    }
+    if(b==0)
+    {
+        cout<<"NO"<<endl;
+        return;
+    }
+    n = n/b;
+    if(n == a or n==b)
+    {
+        cout<<"NO"<<endl;
+        return;
+    }
+    cout<<"YES"<<endl;
+    cout<<a<<" "<<b<<" "<<n<<endl;
+    return;
+
+}
+
+
+
+int main()
+{
+    
+    int t ;
+    cin>>t;
+    while(t--)
+    {
+        solve();
+    }
+    return 0;
+}
+
+/*
+5 1000000000
+2 1
+1 10
+1 1
+4 1000000000
+3 3
+
+
+999999997*/
