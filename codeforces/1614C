@@ -1,0 +1,106 @@
+#include <iostream>
+#include <map>
+#include<unordered_map>
+#include <iterator>
+#include <vector>
+#include <string>
+#include <algorithm>
+#include<utility>
+#include<climits>
+#include<stack>
+#include<set>
+#include<cmath>
+#include<numeric>
+
+
+#define ull unsigned long long
+#define ll long long
+#define NUM 1000000007ll
+//ll mod  = 1000000007;
+using namespace std;
+
+ll binpow(ll x, ll y)
+{
+    ll res = 1ll; // Initialize result
+  
+    while (y > 0ll) {
+        // If y is odd, multiply x with result
+        if (y & 1ll)
+            res = ((res%NUM) * (x%NUM))%NUM;
+  
+        // y must be even now
+        y = y >> 1; // y = y/2
+        x = ((x%NUM) * (x%NUM))%NUM; // Change x to x^2
+    }
+    return res%NUM;
+}
+
+bool sortbysec(pair<ll,ll> &a , pair<ll,ll> &b)
+{
+    if(a.first == b.first)
+    {
+        return (a.second <= b.second);
+    }
+    return (a.first < b.first) ;
+}
+
+void solve()
+{
+    ll n,m;
+    cin>>n>>m;
+    ll or1 = 0ll;
+    for(ll i=0;i<m;i++)
+    {
+        ll a,b,c;
+        cin>>a>>b>>c;
+        or1 = or1|c;
+    }
+    //cout<<or1<<endl;
+    ll num = binpow(2,n-1);
+    //cout<<num<<"num"<<endl;
+
+    ll ans = 0ll;
+    ans = ((or1%NUM)*(num%NUM))%NUM;
+    /*for(ll i=1;i<n;i++)
+    {
+        ans += ((or1%NUM)*(2ll%NUM))%NUM;
+    }
+    ans = ((or1%NUM)*(num%NUM))%NUM;
+    /*for(ll i=63;i>=0;i--)
+    {
+        ll check = 1ll<<i;
+        if(or1&check > 0ll)
+        {
+            ans = (ans%NUM + num%NUM)%NUM;
+        }
+    }*/
+    cout<<ans<<endl;
+    return;
+
+}
+
+
+
+int main()
+{
+    
+    int t ;
+    cin>>t;
+    //t=1;
+    while(t--)
+    {
+        solve();
+    }
+    return 0;
+}
+
+/*
+5 1000000000
+2 1
+1 10
+1 1
+4 1000000000
+3 3
+
+
+999999997*/
