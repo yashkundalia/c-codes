@@ -1,0 +1,82 @@
+#include <iostream>
+#include <map>
+#include<unordered_map>
+#include <iterator>
+#include <vector>
+#include <string>
+#include <algorithm>
+#include<utility>
+#include<climits>
+#include<stack>
+#include<set>
+#include<cmath>
+#include<numeric>
+
+
+#define ull unsigned long long
+#define ll long long
+#define NUM 1000000007
+//ull mod  = 998244353;
+using namespace std;
+
+
+bool sortbysec(pair<ll,ll> &a , pair<ll,ll> &b)
+{
+    if(a.first == b.first)
+    {
+        return (a.second <= b.second);
+    }
+    return (a.first < b.first) ;
+}
+
+void solve()
+{
+    ll q,x;
+    cin>>q>>x;
+    set<pair<ll,ll> > s;
+    vector<ll> mods(x,0);
+    for(ll i=0;i<x;i++)
+    {
+        s.insert(make_pair(mods[i],i));
+    }
+    for(ll i=0;i<q;i++)
+    {
+        ll cur;
+        cin>>cur;
+        cur = cur%x;
+        s.erase(make_pair(mods[cur] ,cur));
+        mods[cur]++;
+        s.insert(make_pair(mods[cur],cur));
+        cout<<s.begin()->first * x + s.begin()->second <<endl;
+        
+    }
+    return;
+
+
+}
+
+
+
+int main()
+{
+    
+    int t ;
+    //cin>>t;
+    t=1;
+    while(t--)
+    {
+        solve();
+    }
+    return 0;
+}
+
+/*
+5 1000000000
+2 1
+1 10
+1 1
+4 1000000000
+3 3
+
+
+999999997*/
