@@ -1,0 +1,208 @@
+#include <iostream>
+#include <map>
+#include<unordered_map>
+#include <iterator>
+#include <vector>
+#include <string>
+#include <algorithm>
+#include<utility>
+#include<climits>
+#include<stack>
+#include<set>
+#include<cmath>
+#include<numeric>
+
+
+#define ull unsigned long long
+#define ll long long
+#define NUM 1000000007
+//ll mod  = 1000000007;
+using namespace std;
+
+
+
+ll binpow(ll x, ll y)
+{
+    ll res = 1ll; // Initialize result
+  
+    while (y > 0ll) {
+        // If y is odd, multiply x with result
+        if (y & 1ll)
+            res = ((res%NUM) * (x%NUM))%NUM;
+  
+        // y must be even now
+        y = y >> 1; // y = y/2
+        x = ((x%NUM) * (x%NUM))%NUM; // Change x to x^2
+    }
+    return res%NUM;
+}
+
+bool sortbysec(pair<ll,ll> &a , pair<ll,ll> &b)
+{
+    if(a.first == b.first)
+    {
+        return (a.second <= b.second);
+    }
+    return (a.first < b.first) ;
+}
+
+
+/*void dfs(int n, int m,int i, int j,vector<vector<int> > &v ,vector<vector<bool> > &vis)
+{
+    if(i<0 || j<0 || i>=n || j>=m || vis[i][j]) return;
+    vis[i][j] = true;
+    int num = v[i][j];
+    x++;
+    int nr = num&8;
+    int e = num&4 ;
+    int s = num&2 ;
+    int w = num&1;
+    if(nr == 0)
+    {
+        //cout<<(num&(1<<3))<<"qw"<<endl;
+        dfs(n,m,i-1,j, v ,vis);
+    }
+
+    if(e == 0)
+    {
+        dfs(n,m,i,j+1,v,vis);
+    }
+    if(s == 0)
+    {
+        dfs(n,m,i+1,j,v,vis);
+    }
+    if(w == 0)
+    {
+        dfs(n,m,i,j-1,v,vis);
+    }
+    //return;
+}*/
+int decide(int f, int s,int rem)
+{
+    //int rem = 10 -f -s;
+    /*if(rem%2 == 0)
+    {
+        s += rem/2;
+    }
+    else
+    {
+        //rem = rem -1;
+        s+= rem/2 + rem%2 ;
+    }
+    */
+    s += rem/2 + rem%2 ;
+    if(f > s) return 1;
+    else return 0;
+
+}
+
+int decide2(int f, int s,int rem)
+{
+    //int rem = 10 -f -s;
+
+    
+    f += rem/2;
+    if(s > f) return 1;
+    else return 0;
+
+}
+
+void solve()
+{
+    string s;
+    cin>>s;
+    int ques =0;
+    int first =0;
+    int second =0;
+    /*for(int i = 1;i<=10;i++)
+    {
+        if(s[i-1] == '?') ques++;
+        else
+        {
+            if(s[i-1] == 1)
+            {
+                if(i%2 == 0) second++;
+                else first++;
+            }
+        }
+    }*/
+    int res =0;
+    int ans = 10;
+    for(int i=1;i<=10;i++)
+    {
+        if(s[i-1] == '?')
+        {
+            if(i%2 == 1) first++;
+        }
+        else if(s[i-1] == '1')
+        {
+            if(i%2 == 0) second++;
+            else first++;
+        }
+        if(1)
+        {
+            if(decide(first,second,10-i) == 1)
+            {
+                ans = min(ans,i);
+                //return;
+            }
+        }
+        
+    }
+    first =0;
+    second =0;
+
+    for(int i=1;i<=10;i++)
+    {
+        if(s[i-1] == '?')
+        {
+            if(i%2 == 0) second++;
+        }
+        else if(s[i-1] == '1')
+        {
+            if(i%2 == 0) second++;
+            else first++;
+        }
+        if(1)
+        {
+            if(decide2(first,second,10-i) == 1)
+            {
+                ans = min(ans,i);
+                //return;
+            }
+        }
+        
+    }
+    cout<<ans<<endl;
+    return;
+
+
+}
+
+
+
+int main()
+{
+    
+    /*freopen("input.txt", "r", stdin);
+    freopen("output.txt", "w", stdout);*/
+    
+    int t ;
+    cin>>t;
+    while(t--)
+    {
+        solve();
+    }
+    return 0;
+}
+
+/*
+5 1000000000
+2 1
+1 10
+1 1
+4 1000000000
+3 3
+
+
+999999997*/
