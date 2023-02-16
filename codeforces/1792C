@@ -1,0 +1,102 @@
+#include <iostream>
+#include <map>
+#include<unordered_map>
+#include <iterator>
+#include <vector>
+#include <string>
+#include <algorithm>
+#include<utility>
+#include<climits>
+#include<stack>
+#include<set>
+#include<cmath>
+#include<numeric>
+
+
+#define ull unsigned long long
+#define ll long long
+#define NUM 1000000007
+//ll mod  = 1000000007;
+using namespace std;
+
+
+
+ll binpow(ll x, ll y)
+{
+    ll res = 1ll; // Initialize result
+  
+    while (y > 0ll) {
+        // If y is odd, multiply x with result
+        if (y & 1ll)
+            res = ((res%NUM) * (x%NUM))%NUM;
+  
+        // y must be even now
+        y = y >> 1; // y = y/2
+        x = ((x%NUM) * (x%NUM))%NUM; // Change x to x^2
+    }
+    return res%NUM;
+}
+
+bool sortbysec(pair<ll,ll> &a , pair<ll,ll> &b)
+{
+    if(a.first == b.first)
+    {
+        return (a.second <= b.second);
+    }
+    return (a.first < b.first) ;
+}
+
+
+
+void solve()
+{
+    int n;
+    cin>>n;
+    vector<int> pos(n+1,0);
+    int i =0;
+    for(int i=0;i<n;i++)
+    {
+        int temp;
+        cin>>temp;
+        pos[temp] =i;
+        //i++;
+    }
+    int l = (n+1)/2;
+    int r = (n+2)/2;
+    while(l > 0 && (l==r || (pos[l] < pos[l+1] && pos[r] > pos[r-1]))) 
+    {
+        l--;
+        r++;
+    }
+    //cout<<r<<" "<<l<<endl;
+    cout<<(n-r+l+1)/2<<endl;
+    return;
+}
+
+
+
+int main()
+{
+    
+    /*freopen("input.txt", "r", stdin);
+    freopen("output.txt", "w", stdout);*/
+
+    int t ;
+    cin>>t;
+    while(t--)
+    {
+        solve();
+    }
+    return 0;
+}
+
+/*
+5 1000000000
+2 1
+1 10
+1 1
+4 1000000000
+3 3
+
+
+999999997*/
