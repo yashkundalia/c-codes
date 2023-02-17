@@ -1,0 +1,123 @@
+#include <iostream>
+#include <map>
+#include<unordered_map>
+#include <iterator>
+#include <vector>
+#include <string>
+#include <algorithm>
+#include<utility>
+#include<climits>
+#include<stack>
+#include<set>
+#include<cmath>
+#include<numeric>
+
+
+#define ull unsigned long long
+#define ll long long
+#define NUM 1000000007
+//ll mod  = 1000000007;
+using namespace std;
+
+
+
+ll binpow(ll x, ll y)
+{
+    ll res = 1ll; // Initialize result
+  
+    while (y > 0ll) {
+        // If y is odd, multiply x with result
+        if (y & 1ll)
+            res = ((res%NUM) * (x%NUM))%NUM;
+  
+        // y must be even now
+        y = y >> 1; // y = y/2
+        x = ((x%NUM) * (x%NUM))%NUM; // Change x to x^2
+    }
+    return res%NUM;
+}
+
+bool sortbysec(pair<ll,ll> &a , pair<ll,ll> &b)
+{
+    if(a.first == b.first)
+    {
+        return (a.second <= b.second);
+    }
+    return (a.first < b.first) ;
+}
+
+
+
+void solve()
+{
+    int n;
+    cin>>n;
+    vector<int> v;
+    int val =0;
+    for(int i=0;i<n;i++)
+    {
+        int temp;
+        cin>>temp;
+        v.push_back(temp);
+        //val ^=temp;
+    }
+    vector<int> pre(n,0);
+    pre[0] = v[0];
+    for(int i=1;i<n;i++)
+    {
+        pre[i] = pre[i-1]^v[i];
+    }
+    int flag = 1;
+    for(int i=0;i<n-1;i++)
+    {
+        if(pre[i] == (pre[i]^pre[n-1]))
+        {
+            cout<<"YES"<<endl;
+            return;
+        }
+    }
+    for(int i=0;i<n-2;i++)
+    {
+        for(int j=i+1;j<n-1;j++)
+        {
+            int first = pre[i];
+            int second = pre[i]^pre[j];
+            int third = pre[j]^pre[n-1];
+            if(first == second and second == third)
+            {
+                cout<<"YES"<<endl;
+                return;
+            }
+        }
+    }
+    cout<<"NO"<<endl;
+    return;
+}
+
+
+
+int main()
+{
+    
+    /*freopen("input.txt", "r", stdin);
+    freopen("output.txt", "w", stdout);*/
+
+    int t ;
+    cin>>t;
+    while(t--)
+    {
+        solve();
+    }
+    return 0;
+}
+
+/*
+5 1000000000
+2 1
+1 10
+1 1
+4 1000000000
+3 3
+
+
+999999997*/
