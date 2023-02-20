@@ -1,0 +1,125 @@
+#include <iostream>
+#include <map>
+#include<unordered_map>
+#include <iterator>
+#include <vector>
+#include <string>
+#include <algorithm>
+#include<utility>
+#include<climits>
+#include<stack>
+#include<set>
+#include<cmath>
+#include<numeric>
+
+
+#define ull unsigned long long
+#define ll long long
+#define NUM 1000000007
+//ll mod  = 1000000007;
+using namespace std;
+
+
+
+ll binpow(ll x, ll y)
+{
+    ll res = 1ll; // Initialize result
+  
+    while (y > 0ll) {
+        // If y is odd, multiply x with result
+        if (y & 1ll)
+            res = ((res%NUM) * (x%NUM))%NUM;
+  
+        // y must be even now
+        y = y >> 1; // y = y/2
+        x = ((x%NUM) * (x%NUM))%NUM; // Change x to x^2
+    }
+    return res%NUM;
+}
+
+bool sortbysec(pair<ll,ll> &a , pair<ll,ll> &b)
+{
+    if(a.first == b.first)
+    {
+        return (a.second <= b.second);
+    }
+    return (a.first < b.first) ;
+}
+
+
+
+void solve()
+{
+    ll n ,w;
+    cin>>n>>w;
+    vector<ll> v;
+    for(ll i=0;i<n;i++)
+    {
+        ll temp;
+        cin>>temp;
+        v.push_back(temp);
+    }
+    ll height = 1;
+    ll space = w;
+    sort(v.begin(),v.end());
+    vector<bool> vis(false,n);
+    for(ll i=0;i<n;i++)
+    while(1)
+    {
+        if(v.empty()) break;
+        if(space < v[0])
+        {
+            height++;
+            space = w;
+        }
+        ll ind = upper_bound(v.begin(),v.end(),space) - v.begin();
+        ind--;
+        /*if(ind == n)
+        {
+            ind--;
+        }
+        /*if(!vis[ind])
+        {
+
+        }*/
+        space = space - v[ind];
+        v.erase(v.begin() + ind);
+    }
+    cout<<height<<endl;
+    return;
+}
+
+
+
+int main()
+{
+    
+    /*freopen("input.txt", "r", stdin);
+    freopen("output.txt", "w", stdout);*/
+    /*vector<ll> fac(200005 ,0);
+    fac[0] = 1ll;
+    fac[1] =1ll;
+    for(ll i=2;i<200005;i++)
+    {
+        fac[i] = ((fac[i-1]%NUM)*(i%NUM))%NUM;
+    }*/
+    //cout<<fac[199999]<<endl;
+    int t ;
+    cin>>t;
+    while(t--)
+    {
+        solve();
+    }
+    return 0;
+}
+
+/*
+5 1000000000
+2 1
+1 10
+1 1
+4 1000000000
+3 3
+
+
+999999997*/
