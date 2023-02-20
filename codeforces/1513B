@@ -1,0 +1,166 @@
+#include <iostream>
+#include <map>
+#include<unordered_map>
+#include <iterator>
+#include <vector>
+#include <string>
+#include <algorithm>
+#include<utility>
+#include<climits>
+#include<stack>
+#include<set>
+#include<cmath>
+#include<numeric>
+
+
+#define ull unsigned long long
+#define ll long long
+#define NUM 1000000007
+//ll mod  = 1000000007;
+using namespace std;
+
+
+
+ll binpow(ll x, ll y)
+{
+    ll res = 1ll; // Initialize result
+  
+    while (y > 0ll) {
+        // If y is odd, multiply x with result
+        if (y & 1ll)
+            res = ((res%NUM) * (x%NUM))%NUM;
+  
+        // y must be even now
+        y = y >> 1; // y = y/2
+        x = ((x%NUM) * (x%NUM))%NUM; // Change x to x^2
+    }
+    return res%NUM;
+}
+
+bool sortbysec(pair<ll,ll> &a , pair<ll,ll> &b)
+{
+    if(a.first == b.first)
+    {
+        return (a.second <= b.second);
+    }
+    return (a.first < b.first) ;
+}
+
+
+
+void solve(vector<ll> &fac)
+{
+    ll n;
+    cin>>n;
+    vector<ll> a;
+    for(ll i=0;i<n;i++)
+    {
+        ll temp;
+        cin>>temp;
+        a.push_back(temp);
+    }
+    vector<ll> count(31,0);
+    for(ll i=0;i<31;i++)
+    {
+        ll num = 1ll<<i;
+        //cout<<num<<endl;
+        for(ll j=0;j<n;j++)
+        {
+            ll n1 = num&a[j] ;
+            if( n1!=0) 
+            {
+                count[i]++;
+            }
+        }
+    }
+    /*for(int i=0;i<5;i++)
+    {
+        cout<<count[i]<<endl;
+    }*/
+    ll x = 0ll;
+    for(int i=0;i<31;i++)
+    {
+        if(count[i] == n)
+        {
+            x += (1ll<<i);
+        }
+    }
+    //int a1 = 1<<0 ;
+    //cout<<a1<<endl;
+    //cout<<x<<endl;
+    
+    ll cnt =0;
+    for(int i=0;i<n;i++)
+    {
+        if(a[i] == x) cnt++;
+    }
+
+   /*int count =0;
+   int val = a[1];
+   for(int i=1;i<n;i++)
+   {
+        val = (val&a[i]);
+   }
+   if(val == a[0]) count++;
+   for(int i=1;i<n;i++)
+    {
+        val = a[0];
+        for(int j=0;j<n;j++)
+        {
+            if(j==i) continue;
+            else
+            {
+                val = val&a[j];
+            }
+
+        }
+        if(a[i] == val) count++;
+    }*/
+    //cout<<count<<"count"<<endl;
+    //if(count<2) cout<<0<<endl;
+    //ll y = n;
+    //cout<<fact(199999ll)<<"fact"<<endl;
+    ll y = n-2;
+    //cout<<fac[199999]<<endl;
+    ll ans = fac[y];
+    ll x1 = (((cnt-1)%NUM)*((cnt)%NUM))%NUM ;
+    ans = ((ans%NUM)*x1)%NUM ;
+    cout<<ans<<endl;
+    return;
+
+}
+
+
+
+int main()
+{
+    
+    /*freopen("input.txt", "r", stdin);
+    freopen("output.txt", "w", stdout);*/
+    vector<ll> fac(200005 ,0);
+    fac[0] = 1ll;
+    fac[1] =1ll;
+    for(ll i=2;i<200005;i++)
+    {
+        fac[i] = ((fac[i-1]%NUM)*(i%NUM))%NUM;
+    }
+    //cout<<fac[199999]<<endl;
+    int t ;
+    cin>>t;
+    while(t--)
+    {
+        solve(fac);
+    }
+    return 0;
+}
+
+/*
+5 1000000000
+2 1
+1 10
+1 1
+4 1000000000
+3 3
+
+
+999999997*/
