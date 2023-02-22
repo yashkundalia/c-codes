@@ -1,0 +1,116 @@
+#include <iostream>
+#include <map>
+#include<unordered_map>
+#include <iterator>
+#include <vector>
+#include <string>
+#include <algorithm>
+#include<utility>
+#include<climits>
+#include<stack>
+#include<set>
+#include<cmath>
+#include<numeric>
+
+
+#define ull unsigned long long
+#define ll long long
+#define NUM 1000000007
+//ll mod  = 1000000007;
+using namespace std;
+
+
+
+ll binpow(ll x, ll y)
+{
+    ll res = 1ll; // Initialize result
+  
+    while (y > 0ll) {
+        // If y is odd, multiply x with result
+        if (y & 1ll)
+            res = ((res%NUM) * (x%NUM))%NUM;
+  
+        // y must be even now
+        y = y >> 1; // y = y/2
+        x = ((x%NUM) * (x%NUM))%NUM; // Change x to x^2
+    }
+    return res%NUM;
+}
+
+bool sortbysec(pair<ll,ll> &a , pair<ll,ll> &b)
+{
+    if(a.first == b.first)
+    {
+        return (a.second <= b.second);
+    }
+    return (a.first < b.first) ;
+}
+
+int func(char c,string s)
+{
+    if(s.size() == 1)
+    {
+        if(s[0] == c) return 0;
+        else return 1;
+    }
+    int mid = s.size()/2 ;
+
+    int c1 =  func(c+1,string(s.begin()+mid ,s.end())) ;
+    c1+=mid - count(s.begin() ,s.begin() + mid , c)  ;
+    int c2 = func(c+1,string(s.begin() ,s.begin() + mid)) ;
+    c2+= mid - count(s.begin() +mid ,s.end() , c)  ;
+     return min(c1,c2);
+
+
+}
+
+void solve()
+{
+    int n;
+    cin>>n;
+    string s;
+    cin>>s;
+    //string s1 = "abcfafaaf";
+    //cout<<string(s1.begin()+1,s1.begin() + 5)<<endl;
+    //cout<<count(s1.begin(),s1.begin() + 2 , 'a')<<endl;
+    cout<<func('a',s)<<endl;
+    return;
+}
+
+
+
+int main()
+{
+    
+    /*freopen("input.txt", "r", stdin);
+    freopen("output.txt", "w", stdout);*/
+    /*vector<ll> fac(200005 ,0);
+    fac[0] = 1ll;
+    fac[1] =1ll;
+    for(ll i=2;i<200005;i++)
+    {
+        fac[i] = ((fac[i-1]%NUM)*(i%NUM))%NUM;
+    }*/
+    //cout<<fac[199999]<<endl;
+    int t ;
+    cin>>t;
+    while(t--)
+    {
+        solve();
+    }
+    return 0;
+    
+    
+    return 0;
+}
+
+/*
+5 1000000000
+2 1
+1 10
+1 1
+4 1000000000
+3 3
+
+
+999999997*/
