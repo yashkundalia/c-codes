@@ -1,0 +1,152 @@
+#include <iostream>
+#include <map>
+#include<unordered_map>
+#include <iterator>
+#include <vector>
+#include <string>
+#include <algorithm>
+#include<utility>
+#include<climits>
+#include<stack>
+#include<set>
+#include<cmath>
+#include<numeric>
+
+
+#define ull unsigned long long
+#define ll long long
+#define NUM 1000000007
+//ll mod  = 1000000007;
+using namespace std;
+
+
+
+ll binpow(ll x, ll y)
+{
+    ll res = 1ll; // Initialize result
+  
+    while (y > 0ll) {
+        // If y is odd, multiply x with result
+        if (y & 1ll)
+            res = ((res%NUM) * (x%NUM))%NUM;
+  
+        // y must be even now
+        y = y >> 1; // y = y/2
+        x = ((x%NUM) * (x%NUM))%NUM; // Change x to x^2
+    }
+    return res%NUM;
+}
+
+bool sortbysec(pair<ll,ll> &a , pair<ll,ll> &b)
+{
+    if(a.first == b.first)
+    {
+        return (a.second <= b.second);
+    }
+    return (a.first < b.first) ;
+}
+ 
+//vector<bool> ch(1025,false);
+//vector<int> num(1025,0);
+bool check(int k,vector<int> v,vector<bool> ch)
+{
+    int n = v.size();
+    for(int i=0;i<n;i++)
+    {
+        if(!ch[v[i]^k]) return false;
+    }
+    return true;
+}
+
+void solve()
+{
+    ll n,k;
+    cin>>n>>k;
+    vector<ll> v;
+    ll sum =0ll;
+    ll count =0;
+    ll m1 = 0ll;
+    for(ll i=0;i<n;i++)
+    {
+        ll temp;
+        cin>>temp;
+        v.push_back(temp);
+        sum+=temp;
+        m1 = max(temp,m1);
+        if(temp == 0) count++;
+    }
+    ll pow = -1;
+    ll num =1ll;
+    while(num<=m1)
+    {
+        pow++;
+        num = num*k;
+    }
+    while(num>=1)
+    {
+        count = 0;
+        for(ll i=0;i<n;i++)
+        {
+            if(v[i]>=num) 
+            {
+                count++;
+                if(count>1)
+                {
+                    cout<<"NO"<<endl;
+                    return;
+                }
+                v[i] = v[i] - num;
+                sum = sum - num;
+            }
+
+        }
+        num = num/k;
+    }
+    //num= num/k;
+    //cout<<num<<endl;
+    //num = num/k;
+    //cout<<num<<endl;
+    /*while(num>=1ll)
+    {
+        if(num<=m1)
+        {
+            if(sum/num > 1ll)
+            {
+                cout<<"NO"<<endl;
+                return;
+            }
+        //cout<<sum<<" "<<num<<endl;
+            m1-=num;
+            sum = sum%num;
+            num = num/k;
+
+        }
+        else num = num/k;
+        
+
+    }*/
+    if(sum==0) cout<<"YES"<<endl;
+    else cout<<"NO"<<endl;
+    return;
+
+
+
+
+}
+
+
+
+
+int main()
+{
+    
+    int t ;
+    cin>>t;
+    while(t--)
+    {
+        solve();
+    }
+    return 0;
+    
+}
+
