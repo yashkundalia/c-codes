@@ -1,0 +1,102 @@
+#include <iostream>
+#include <map>
+#include<unordered_map>
+#include <iterator>
+#include <vector>
+#include <string>
+#include <algorithm>
+#include<utility>
+#include<climits>
+#include<stack>
+#include<set>
+#include<cmath>
+#include<numeric>
+
+
+#define ull unsigned long long
+#define ll long long
+#define NUM 1000000007
+//ll mod  = 1000000007;
+using namespace std;
+
+
+
+ll binpow(ll x, ll y)
+{
+    ll res = 1ll; // Initialize result
+  
+    while (y > 0ll) {
+        // If y is odd, multiply x with result
+        if (y & 1ll)
+            res = ((res%NUM) * (x%NUM))%NUM;
+  
+        // y must be even now
+        y = y >> 1; // y = y/2
+        x = ((x%NUM) * (x%NUM))%NUM; // Change x to x^2
+    }
+    return res%NUM;
+}
+
+bool sortbysec(pair<ll,ll> &a , pair<ll,ll> &b)
+{
+    if(a.first == b.first)
+    {
+        return (a.second <= b.second);
+    }
+    return (a.first < b.first) ;
+}
+ 
+//vector<bool> ch(1025,false);
+//vector<int> num(1025,0);
+bool check(int k,vector<int> v,vector<bool> ch)
+{
+    int n = v.size();
+    for(int i=0;i<n;i++)
+    {
+        if(!ch[v[i]^k]) return false;
+    }
+    return true;
+}
+
+void solve(map<ll,ll> mp)
+{
+    ll n;
+    cin>>n;
+    ll ans =0;
+    ll i =0;
+    while(n>0)
+    {
+        if(n%2 == 1)
+        {
+            ans+= mp[pow(2,i)];
+        }
+        i++;
+        n = n/2;
+    }
+    cout<<ans<<endl;
+    return;
+
+}
+
+
+
+
+int main()
+{
+    map<ll,ll> mp;
+    mp[1] = 1;
+    for(ll i=2;i<=1e18;i=i*2)
+    {
+        mp[i] = 2*mp[i/2] + 1;
+    }
+    
+    int t ;
+    cin>>t;
+    while(t--)
+    {
+        solve(mp);
+    }
+    return 0;
+    
+}
+
