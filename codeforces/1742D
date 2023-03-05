@@ -1,0 +1,92 @@
+#include <iostream>
+#include <map>
+#include<unordered_map>
+#include <iterator>
+#include <vector>
+#include <string>
+#include <algorithm>
+#include<utility>
+#include<climits>
+#include<stack>
+#include<set>
+#include<cmath>
+#include<deque>
+#include<numeric>
+
+
+#define ull unsigned long long
+#define ll long long
+#define NUM 1000000007
+//ll mod  = 1000000007;
+using namespace std;
+
+
+
+ll binpow(ll x, ll y)
+{
+    ll res = 1ll; // Initialize result
+  
+    while (y > 0ll) {
+        // If y is odd, multiply x with result
+        if (y & 1ll)
+            res = ((res%NUM) * (x%NUM))%NUM;
+  
+        // y must be even now
+        y = y >> 1; // y = y/2
+        x = ((x%NUM) * (x%NUM))%NUM; // Change x to x^2
+    }
+    return res%NUM;
+}
+
+bool sortbysec(pair<ll,ll> &a , pair<ll,ll> &b)
+{
+    if(a.first == b.first)
+    {
+        return (a.second <= b.second);
+    }
+    return (a.first < b.first) ;
+}
+ 
+
+void solve()
+{
+    int n;
+    cin>>n;
+    //vector<int> v;
+    map<int,int> mp;
+    for(int i=0;i<n;i++)
+    {
+        int temp;
+        cin>>temp;
+        mp[temp] = i + 1;
+    }
+    int ans =-1;
+    for(auto i:mp)
+    {
+        for(auto j:mp)
+        {
+            if(__gcd(i.first,j.first) == 1)
+            {
+                ans = max(ans,i.second+j.second);
+            }
+        }
+    }
+    cout<<ans<<endl;
+    return;
+}
+
+
+int main()
+{
+    
+    
+    int t ;
+    cin>>t;
+    while(t--)
+    {
+        solve();
+    }
+    return 0;
+    
+}
+
