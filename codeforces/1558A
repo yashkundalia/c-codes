@@ -1,0 +1,132 @@
+#include <iostream>
+#include <map>
+#include<unordered_map>
+#include <iterator>
+#include <vector>
+#include <string>
+#include <algorithm>
+#include<utility>
+#include<climits>
+#include<stack>
+#include<set>
+#include<cmath>
+#include<deque>
+#include<numeric>
+
+
+#define ull unsigned long long
+#define ll long long
+#define NUM 1000000007
+//ll mod  = 1000000007;
+using namespace std;
+
+
+
+ll binpow(ll x, ll y)
+{
+    ll res = 1ll; // Initialize result
+  
+    while (y > 0ll) {
+        // If y is odd, multiply x with result
+        if (y & 1ll)
+            res = ((res%NUM) * (x%NUM))%NUM;
+  
+        // y must be even now
+        y = y >> 1; // y = y/2
+        x = ((x%NUM) * (x%NUM))%NUM; // Change x to x^2
+    }
+    return res%NUM;
+}
+
+bool sortbysec(pair<ll,ll> &a , pair<ll,ll> &b)
+{
+    if(a.first == b.first)
+    {
+        return (a.second <= b.second);
+    }
+    return (a.first < b.first) ;
+}
+ 
+int binarysearch(vector<int> v, int find,int l, int r)
+{
+    if(find<v[l] or find > v[r]) 
+    {
+        return -1;
+    }
+    while(l<=r)
+    {
+        int mid  = l + (r-l)/2 ;
+        if(v[mid] == find) return mid;
+        if(v[mid]  > find) r = mid -1;
+        else l =mid +1;
+    }
+    return -1;
+}
+
+void solve()
+{
+    int a,b;
+    cin>>a>>b;
+    int n = a+b;
+    set<int> ans;
+    if(n%2 ==0)
+    {
+        int tot_a = n/2;
+        int tot_b = n/2;
+        int a_break,b_break;
+        int min_break = 0;
+        min_break = min(abs(b-n/2) , abs(a-n/2));
+        int t= min(a,b);
+        while(t>= 0)
+        {
+            ans.insert(min_break);
+            min_break+=2;
+            t--;
+
+        }
+
+    }
+    else
+    {
+        int min_break = 0;
+        min_break = min(abs(b-n/2) , abs(a-(n+1)/2)) ;
+        int t = min(a,b);
+        while(t >= 0)
+        {
+            ans.insert(min_break);
+            min_break+=2;
+            t--;
+        }
+        min_break = min(abs(a-n/2) , abs(b-(n+1)/2)) ;
+        t = min(a,b);
+        while(t >= 0)
+        {
+            ans.insert(min_break);
+            min_break+=2;
+            t--;
+        }
+    }
+    cout<<ans.size()<<endl;
+    for(auto i:ans)
+    {
+        cout<<i<<" ";
+    }
+    cout<<endl;
+    return;
+}
+
+
+int main()
+{
+    
+
+    int t ;
+    cin>>t;
+    //t=1;
+    while(t--)
+    {
+        solve();
+    }
+    return 0;
+    
+}
