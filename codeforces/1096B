@@ -1,0 +1,160 @@
+#include <iostream>
+#include <map>
+#include<unordered_map>
+#include <iterator>
+#include <vector>
+#include <string>
+#include <algorithm>
+#include<utility>
+#include<climits>
+#include<stack>
+#include<set>
+#include<cmath>
+#include<deque>
+#include<numeric>
+
+
+#define ull unsigned long long
+#define ll long long
+#define NUM 998244353
+//ll mod  = 1000000007;
+using namespace std;
+
+
+
+ll binpow(ll x, ll y)
+{
+    ll res = 1ll; // Initialize result
+  
+    while (y > 0ll) {
+        // If y is odd, multiply x with result
+        if (y & 1ll)
+            res = ((res%NUM) * (x%NUM))%NUM;
+  
+        // y must be even now
+        y = y >> 1; // y = y/2
+        x = ((x%NUM) * (x%NUM))%NUM; // Change x to x^2
+    }
+    return res%NUM;
+}
+
+bool sortbysec(pair<ll,ll> &a , pair<ll,ll> &b)
+{
+    if(a.first == b.first)
+    {
+        return (a.second <= b.second);
+    }
+    return (a.first < b.first) ;
+}
+ 
+int binarysearch(vector<int> v, int find,int l, int r)
+{
+    if(find<v[l] or find > v[r]) 
+    {
+        return -1;
+    }
+    while(l<=r)
+    {
+        int mid  = l + (r-l)/2 ;
+        if(v[mid] == find) return mid;
+        if(v[mid]  > find) r = mid -1;
+        else l =mid +1;
+    }
+    return -1;
+}
+bool isvalid(ll i , ll j ,ll n,ll m)
+{
+    if(i<0 or i> n-1 or j<0 or j> m-1)
+    {
+        return false;
+    }
+    return true;
+}
+void dfs(vector<vector<int> > &adj, vector<bool> &check, int i)
+{
+    if(check[i]) return;
+    check[i] = true;
+    for(auto j : adj[i])
+    {
+        if(!check[j]) dfs(adj,check,j) ;
+    }
+    return;
+}
+void solve()
+{
+    int n;
+    cin>>n;
+    string s;
+    cin>>s;
+    ll start=0;
+    ll end =0;
+    //string start ="" ;
+    //string end  ="";
+    //start+=s[0];
+    //end+=s[n-1];
+    if(n==1)
+    {
+        cout<<2<<endl;
+        return;
+    }
+    for(int i=0;i<n;i++)
+    {
+        if(s[i] == s[0])
+        {
+            start++;
+        }
+        else break;
+    }
+    for(int i=n-1;i>=0;i--)
+    {
+        if(s[i] == s[n-1])
+        {
+            end++;
+        }
+        else break;
+    }
+    /*if(start.length()==end.length() and s[0] == s[n-1])
+    {
+        int x = start.length();
+        int ans = x*(x+1);
+        ans/=2;
+        cout<<ans<<endl;
+        return;
+    }*/
+    //cout<<start<<" "<<end<<endl;
+    if(s[0]==s[n-1])
+    {
+        ll ans =0;
+        ans =(((start+1)%NUM)*((end+1)%NUM)%NUM) ;
+        cout<<ans<<endl;
+        return;
+    }
+    else
+    {
+        cout<<(start + end + 1)%NUM<<endl;
+        return;
+    }
+    return;
+
+
+}
+
+
+
+    
+
+int main()
+{
+    
+    
+    int t ;
+    //cin>>t;
+    t=1;
+    while(t--)
+    {
+    
+        solve();
+    }
+    return 0;
+    
+}
